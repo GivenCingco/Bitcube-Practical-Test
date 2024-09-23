@@ -1,0 +1,50 @@
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+
+# Exclude all .tfvars files
+*.tfvars
+
+# Exclude override files as they are usually used to override resources locally and not meant to be kept in version control
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Include tfplan files
+*.tfplan
+
+# Ignore any `.terraformrc` file
+.terraformrc
+terraform.rc
+
+# Ignore any secret files
+*.key
+*.pem
+*.p12
+*.cer
+*.crt
+
+# Backup files
+*.backup
+*.bak
+
+# Specific OS files
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Linux
+*~
+
+# Ignore the private key file
+*.pem
