@@ -22,29 +22,32 @@ resource "aws_iam_policy" "ecr_readonly_policy" {
   description = "Amazon ECR ReadOnly Policy"
 
 
-  policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Effect = "Allow",
-        Action = [
-          "ecr:GetAuthorizationToken",
-          "ecr:BatchCheckLayerAvailability",
-          "ecr:GetDownloadUrlForLayer",
-          "ecr:GetRepositoryPolicy",
-          "ecr:DescribeRepositories",
-          "ecr:ListImages",
-          "ecr:DescribeImages",
-          "ecr:BatchGetImage",
-          "ecr:GetLifecyclePolicy",
-          "ecr:GetLifecyclePolicyPreview",
-          "ecr:ListTagsForResource",
-          "ecr:DescribeImageScanFindings"
-        ],
-        Resource = "*"
-      }
+  policy = jsonencode(
+   {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ecr:GetAuthorizationToken",
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:GetRepositoryPolicy",
+                "ecr:DescribeRepositories",
+                "ecr:ListImages",
+                "ecr:DescribeImages",
+                "ecr:BatchGetImage",
+                "ecr:GetLifecyclePolicy",
+                "ecr:GetLifecyclePolicyPreview",
+                "ecr:ListTagsForResource",
+                "ecr:DescribeImageScanFindings"
+            ],
+            "Resource": "*"
+        }
     ]
-  })
+}
+  
+  )
 }
 
 /* ======== Attach AmazonS3ReadOnlyAccess policy =======*/
@@ -52,22 +55,24 @@ resource "aws_iam_policy" "s3_readonly_policy" {
   name        = "AmazonS3ReadOnlyAccessPolicy"
   description = "Amazon S3 ReadOnly Access Policy"
 
-  policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Effect = "Allow",
-        Action = [
-          "s3:Get*",
-          "s3:List*",
-          "s3:Describe*",
-          "s3-object-lambda:Get*",
-          "s3-object-lambda:List*"
-        ],
-        Resource = "*"
-      }
+  policy = jsonencode(
+    {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:Get*",
+                "s3:List*",
+                "s3:Describe*",
+                "s3-object-lambda:Get*",
+                "s3-object-lambda:List*"
+            ],
+            "Resource": "*"
+        }
     ]
-  })
+}
+  )
 }
 
 /* ======== Attach AmazonSSMReadOnlyAccess policy =======*/
@@ -75,20 +80,22 @@ resource "aws_iam_policy" "ssm_readonly_policy" {
   name        = "AmazonSSMReadOnlyAccessPolicy"
   description = "Amazon SSM ReadOnly Access Policy"
 
-  policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Effect = "Allow",
-        Action = [
-          "ssm:Describe*",
-          "ssm:Get*",
-          "ssm:List*"
-        ],
-        Resource = "*"
-      }
+  policy = jsonencode(
+   {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ssm:Describe*",
+                "ssm:Get*",
+                "ssm:List*"
+            ],
+            "Resource": "*"
+        }
     ]
-  })
+}
+  )
 }
 
 

@@ -12,7 +12,7 @@ resource "tls_private_key" "this" {
 }
 
 resource "aws_secretsmanager_secret" "ec2_key_pair" {
-  name        = "bitcube_KP"
+  name        = "bitcube_KP3"
   description = "EC2 Key Pair for SSH access"
 }
 
