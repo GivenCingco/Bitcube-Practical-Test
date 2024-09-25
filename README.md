@@ -89,10 +89,5 @@ This structured approach facilitates a seamless deployment, ensuring that the la
 
 # Access the application
 * To access the application, navigate to the EC2 instance details, find the Public IPv4 address, and enter it in a new browser window.
-* You can also SSH into your instance
-```
-ssh -i /path/to/your-key.pem ec2-user@<Public-IP-Address>
 
-```
-  
 
