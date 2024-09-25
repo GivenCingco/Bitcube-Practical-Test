@@ -77,5 +77,22 @@ When a user pushes code to the main branch of a GitHub repository, this action t
 Once the code is retrieved, AWS CodeBuild is triggered to build the application. CodeBuild uses the buildspec.yml file to define the build process, 
 which consists of several phases: *Pre-build phase*, *Build phase* and *post-build phase*. During the build process, once the Docker image is built and tagged, it is pushed to Amazon ECR, where it is securely stored. ECR allows for easy management of Docker images, enabling the user to pull the images for deployment in subsequent steps of the pipeline.
 
-# Second step in AWS CodePipeline ( AWS CodeDeploy)
+# Second step in AWS CodePipeline
 After the Docker image is successfully pushed to Amazon ECR, AWS CodeDeploy is triggered to manage the application deployment. CodeDeploy retrieves the newly built image from ECR and deploys it to a specified deployment group, which includes a set of EC2 instances identified by tags. This setup ensures that the latest version of the application runs in the production environment, supporting continuous deployment practices. 
+
+# Third and final step in the AWS CodePipeline 
+In the final step of the AWS pipeline, AWS CodeDeploy is responsible for deploying the application to the EC2 instance. The EC2 instance has a user data script that installs dependencies, Docker, and the AWS CodeDeploy agent. During this stage, AWS CodeDeploy fetches the zipped application files stored in S3, including the appspec.yml file that contains the lifecycle hook scripts.
+
+After these scripts execute, AWS CodeDeploy continues with the deployment process by fetching parameters stored in the Parameter Store. These parameters, such as the Docker image tag and repository name, are used to pull the latest Docker image from ECR and deploy it to the EC2 instance.
+
+This structured approach facilitates a seamless deployment, ensuring that the latest version of the application is running smoothly on the specified EC2 instance.
+
+# Access the application
+* To access the application, navigate to the EC2 instance details, find the Public IPv4 address, and enter it in a new browser window.
+* You can also SSH into your instance
+```
+ssh -i /path/to/your-key.pem ec2-user@<Public-IP-Address>
+
+```
+  
+
