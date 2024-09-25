@@ -76,3 +76,6 @@ When a user pushes code to the main branch of a GitHub repository, this action t
 
 Once the code is retrieved, AWS CodeBuild is triggered to build the application. CodeBuild uses the buildspec.yml file to define the build process, 
 which consists of several phases: *Pre-build phase*, *Build phase* and *post-build phase*. During the build process, once the Docker image is built and tagged, it is pushed to Amazon ECR, where it is securely stored. ECR allows for easy management of Docker images, enabling the user to pull the images for deployment in subsequent steps of the pipeline.
+
+# Second step in AWS CodePipeline ( AWS CodeDeploy)
+After the Docker image is successfully pushed to Amazon ECR, AWS CodeDeploy is triggered to manage the application deployment. CodeDeploy retrieves the newly built image from ECR and deploys it to a specified deployment group, which includes a set of EC2 instances identified by tags. This setup ensures that the latest version of the application runs in the production environment, supporting continuous deployment practices. 
