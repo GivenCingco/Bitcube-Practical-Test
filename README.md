@@ -61,3 +61,13 @@ The ***.gitignore*** file is essential for preventing large and sensitive files,
 `.terraform.lock.hcl`
 
 The ***.terraform.lock.hcl*** file is used by Terraform to manage provider dependencies and their versions, ensuring that the same versions of providers are used across different environments and by different team members, which helps maintain consistency and stability in infrastructure deployments.
+
+
+# Brief set of instructions about the environment and how the CI/DC pipeline works.
+## 
+I first created an S3 bucket to store the Terraform state file and a DynamoDB table for state locking. The remote S3 setup facilitates collaboration, while the DynamoDB table ensures that the state is locked, preventing simultaneous changes by multiple users.
+
+Next, I initialized the repository to install all the Terraform dependencies. I ran the terraform plan command to view the execution plan without committing any changes. If I was satisfied with the plan, I would then execute terraform apply --auto-approve, using the --auto-approve flag to avoid manually confirming changes each time.
+
+Additionally, I created an AWS CodeStar connection between GitHub and my AWS account and set up parameters in the Parameter Store, including account ID, AWS region, container name, ECR repository, and image tag. These parameters will be used by CodeBuild, allowing values to be pulled directly from the Parameter Store instead of hardcoding them in the buildspec.yml file, which enhances security and maintainability.
+
