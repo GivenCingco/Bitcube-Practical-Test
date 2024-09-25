@@ -1,12 +1,10 @@
 module "ecr" {
   source = "terraform-aws-modules/ecr/aws"
 
-  repository_name = "bitcube-image2"
-
-     
+  repository_name = var.image_repo_name
 
   repository_read_write_access_arns = ["arn:aws:iam::009160050878:role/BitcubeEC2ServiceRole"]
-  
+
   /* ======== Custom repository policy =======*/
   repository_policy = jsonencode({
     Version = "2012-10-17",
@@ -42,6 +40,22 @@ module "ecr" {
       }
     ]
   })
+
+  tags = {
+    Terraform   = "true"
+    Environment = "dev"
+  }
+}
+
+# Create the ECR repository with mutable image tags
+resource "aws_ecr_repository" "bitcube_repository" {
+  name                 = var.image_repo_name
+  image_tag_mutability = "MUTABLE"
+
+  # Use the same repository policy as above if needed
+  image_scanning_configuration {
+    scan_on_push = true
+  }
 
   tags = {
     Terraform   = "true"
