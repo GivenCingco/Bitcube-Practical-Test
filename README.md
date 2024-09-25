@@ -71,3 +71,8 @@ Next, I initialized the repository to install all the Terraform dependencies. I 
 
 Additionally, I created an AWS CodeStar connection between GitHub and my AWS account and set up parameters in the Parameter Store, including account ID, AWS region, container name, ECR repository, and image tag. These parameters will be used by CodeBuild, allowing values to be pulled directly from the Parameter Store instead of hardcoding them in the buildspec.yml file, which enhances security and maintainability.
 
+# First step in AWS CodePipeline
+When a user pushes code to the main branch of a GitHub repository, this action triggers an AWS CodePipeline through a GitHub Action configured to initiate the pipeline. The first step in the pipeline is the Source step, where the code is fetched from the GitHub repository using the AWS CodeStar connection.
+
+Once the code is retrieved, AWS CodeBuild is triggered to build the application. CodeBuild uses the buildspec.yml file to define the build process, 
+which consists of several phases: *Pre-build phase*, *Build phase* and *post-build phase*. During the build process, once the Docker image is built and tagged, it is pushed to Amazon ECR, where it is securely stored. ECR allows for easy management of Docker images, enabling the user to pull the images for deployment in subsequent steps of the pipeline.
