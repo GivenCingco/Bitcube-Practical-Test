@@ -1,12 +1,12 @@
 variable "account_id" {
   description = "AWS account ID"
   type        = string
-  default = "009160050878"
+  default = "135808943588"
 }
 
 variable "codestart_connector_cred" {
   type = string
-  default = "arn:aws:codeconnections:us-east-1:009160050878:connection/b15fbc4a-7e99-486b-b571-fbc88dff0d19"
+  default = "arn:aws:codeconnections:eu-west-2:135808943588:connection/879b3b40-801e-4948-a68c-e1a02853bb91"
   description = "Variable for CodeStar connection credentials"
 
 }
@@ -25,7 +25,7 @@ variable "image_tag" {
 
 
 variable "region" {
-  description = "Reigon"
+  description = "Region"
   type        = string
   default     = "us-east-1"
 }
@@ -33,5 +33,11 @@ variable "region" {
 variable "bucket" {
   description = "Bucket "
   type        = string
-  default     = "given-cingco-devops-directive-tf-state"
+  default     = "given-cingco-devops-directive-tf-state-ccadcadv"
+}
+
+variable "github_url" {
+  description = "source of the buildpec file on GitHub "
+  type        = string
+  default     = "https://github.com/givencingco-bitcube/karmah-web-main-copy"
 }

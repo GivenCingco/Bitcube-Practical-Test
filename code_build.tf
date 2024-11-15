@@ -1,11 +1,11 @@
 resource "aws_codebuild_project" "bitcube_codebuild" {
-  name          = "Bitcube-Practical-Test"
+  name          = "karma-pipeline"
   description   = "CodeBuild project for Bitcube application"
   build_timeout = 60
 
   source {
     type      = "GITHUB"
-    location  = "https://github.com/GivenCingco/nextjs-blog-bitcube"  
+    location  = "https://github.com/givencingco-bitcube/karmah-terraform"  
     buildspec = "buildspec.yml" 
   }
 
